@@ -1,13 +1,14 @@
 import React from "react";
 
-function ShopComponent({ setValueConfirm, messegeCheck, clickRegister, inputPassShop, valChar, valNumber, valuePassShop, setConfirmPass, confirmPass, lengthPass }) {
+function ShopComponent({ setValueConfirm, messegeCheck, clickRegister, inputPassShop, valChar, valNumber, valuePassShop, setConfirmPass, confirmPass, lengthPass, setErrorName, spanErroName }) {
     
     
     return (
         <>
             <form>
                 <h3>1 - Cadastre-se em nossa plataforma Rc</h3>
-                <input type="text" placeholder="Seu nome" required />
+                <input type="text" placeholder="Seu nome" onChange={(e) => setErrorName(e.target.value)} required />
+                <span>{spanErroName? "Insira seu nome" : "" }</span>
                 <input type="email" placeholder="E-mail" required />
 
                 {inputPassShop()}

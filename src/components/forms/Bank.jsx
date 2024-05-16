@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Card from "./card/Card";
 
-export default function BankComponent({setIdadeSelecionada, inputPassBank, clickConfirmBank, errorPassword}) {
+export default function BankComponent({setIdadeSelecionada, inputPassBank, clickConfirmBank, errorPassword, setValueSexo}) {
     const [nameCard, setNameCard] = useState("");
 
-
+    const sexoSelect = (e) => {
+        setValueSexo(e.target.value)
+    }
 
     return(
         <>
@@ -39,7 +41,7 @@ export default function BankComponent({setIdadeSelecionada, inputPassBank, click
                 />
 
                 <label>Sexo:</label>
-                <select name="sexo" required>                    
+                <select name="sexo" required onChange={sexoSelect}>                    
                     <option value="selecione">selecione</option>
                     <option value="masculino">Masculino</option>
                     <option value="feminino">Feminino</option>

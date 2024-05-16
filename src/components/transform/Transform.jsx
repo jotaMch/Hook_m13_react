@@ -12,12 +12,15 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
         const [valueConfirm, setValueConfirm] = useState("")
         const [messegeCheck, setMessegeCheck] = useState(false);
         const [errorPassword, setErrorPassword] = useState("");
+        const [errorName, setErrorName] = useState("");
+        const [spanErroName, setSpanErroName] = useState(false);        
+        const [valueSexo, setValueSexo] = useState("");
 
 
         useEffect(() => {
             const hasNumberShop = /\d/.test(valuePassShop);
             const hasSpecialCharShop = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(valuePassShop);
-        
+
             if (!hasNumberShop) {
                 setNumberValueShop("A senha deve conter pelo menos um número");                                
                 props.setBorderErro(true)
@@ -48,16 +51,21 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
             const hasSpecialCharShop = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(valuePassShop);
             const isPasswordLongEnough = valuePassShop.length >= 10;
             
-            if (hasNumberShop && hasSpecialCharShop && isPasswordLongEnough && valueConfirm === valuePassShop) {
+                        
+            if (hasNumberShop && hasSpecialCharShop && isPasswordLongEnough && valueConfirm === valuePassShop && errorName.length >= 3) {
                 setMessegeCheck(true);
+            } else if(errorName.length < 3){
+                setSpanErroName(true)
+                setMessegeCheck(false)
             } else {
                 alert("A senha não atende aos critérios de validação");
-                return props.setBorderErro(true)
-            } 
+            }             
+        
         }
         
         const clickConfirmBank = (e) => {
             e.preventDefault()
+            
             if(valuePassBank !== valuePassShop){
                 setErrorPassword("Sua senha está incorreta!")
                 setMessegeCheck(true);
@@ -67,7 +75,10 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
                     setRegisterOk(false)
                 }, 1000);
             }
-            if (!idadeSelecionada) {
+
+            if(valueSexo === "selecione") {
+                alert("Selecione o seu sexo")
+            } else if (!idadeSelecionada) {
                 alert("Por favor, selecione se você é maior de 18 anos.");
                 
             }
@@ -90,6 +101,8 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
                     messegeCheck={messegeCheck}
                     clickRegister={clickRegister}
                     setValueConfirm={setValueConfirm}
+                    setErrorName={setErrorName}
+                    spanErroName={spanErroName}
                 />}
                 
                 {registerOk &&  messegeCheck &&
@@ -99,6 +112,7 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
                     clickConfirmBank={clickConfirmBank}
                     errorPassword={errorPassword}
                     setIdadeSelecionada={setIdadeSelecionada}
+                    setValueSexo={setValueSexo}
                 />}
                 {!registerOk && <p className="parabens">Parabéns, gora você faz parte da Rc Bank</p>}
             </div>
