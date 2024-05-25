@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Card from "./card/Card";
 
-export default function BankComponent({setIdadeSelecionada, inputPassBank, clickConfirmBank, errorPassword, setValueSexo}) {
-    const [nameCard, setNameCard] = useState("");
+export default function BankComponent({setIdadeSelecionada, inputPassBank, clickConfirmBank, errorPassword, setValueSexo, nameCard, setNameCard, setAdressUser}) {
 
     const sexoSelect = (e) => {
         setValueSexo(e.target.value)
@@ -65,7 +64,7 @@ export default function BankComponent({setIdadeSelecionada, inputPassBank, click
                 </div>
 
                 <label htmlFor="endereco">Endereço:</label>
-                <input type="text" id="endereco" placeholder="Cidade" />
+                <input type="text" id="endereco" onChange={(e) => setAdressUser(e.target.value)} placeholder="Cidade" />
                 <input type="text" placeholder="Complemento" /> 
 
                 <label htmlFor="password">Confirme sua senha Rc:</label>

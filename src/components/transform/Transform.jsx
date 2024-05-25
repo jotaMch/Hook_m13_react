@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BankComponent from "../forms/Bank";
 import ShopComponent from "../forms/Shop";
+import List from "./list/List";
 
 function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, valuePassShop, ...props }) {
         const [idadeSelecionada, setIdadeSelecionada] = useState(false);
@@ -9,12 +10,15 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
         const [numberValueShop, setNumberValueShop] = useState("");
         const [lengthPass, setLengthPass] = useState("");
         const [confirmPass, setConfirmPass] = useState(true);
-        const [valueConfirm, setValueConfirm] = useState("")
+        const [valueConfirm, setValueConfirm] = useState("");
         const [messegeCheck, setMessegeCheck] = useState(false);
         const [errorPassword, setErrorPassword] = useState("");
         const [errorName, setErrorName] = useState("");
         const [spanErroName, setSpanErroName] = useState(false);        
         const [valueSexo, setValueSexo] = useState("");
+
+        const [nameCard, setNameCard] = useState("");
+        const [adressUser, setAdressUser] = useState("")
 
 
         useEffect(() => {
@@ -51,7 +55,7 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
             const hasSpecialCharShop = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(valuePassShop);
             const isPasswordLongEnough = valuePassShop.length >= 10;
             
-                        
+
             if (hasNumberShop && hasSpecialCharShop && isPasswordLongEnough && valueConfirm === valuePassShop && errorName.length >= 3) {
                 setMessegeCheck(true);
             } else if(errorName.length < 3){
@@ -113,8 +117,14 @@ function TransformedComponent({ inputPassBank, inputPassShop, valuePassBank, val
                     errorPassword={errorPassword}
                     setIdadeSelecionada={setIdadeSelecionada}
                     setValueSexo={setValueSexo}
+                    nameCard={nameCard}
+                    setNameCard={setNameCard}
+                    setAdressUser={setAdressUser}
+                    
                 />}
-                {!registerOk && <p className="parabens">Parabéns, gora você faz parte da Rc Bank</p>}
+                {!registerOk && 
+                <List valuePassShop={valuePassShop} nameCard={nameCard} adressUser={adressUser}/>
+                }
             </div>
         );
     };
